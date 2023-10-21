@@ -1,0 +1,38 @@
+{
+  "248": {
+    "*": {
+      "specifier": "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/src/components/navigation.tsx",
+      "name": "*"
+    }
+  },
+  "454": {
+    "*": {
+      "specifier": "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/node_modules/@owoce/tangle/dist/runtime/router/not-found/not-found-boundary.js",
+      "name": "*"
+    }
+  },
+  "459": {
+    "*": {
+      "specifier": "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/node_modules/@owoce/tangle/dist/runtime/router/client-router.js",
+      "name": "*"
+    }
+  },
+  "602": {
+    "*": {
+      "specifier": "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/node_modules/@owoce/tangle/dist/runtime/router/navigation-context.js",
+      "name": "*"
+    }
+  },
+  "621": {
+    "*": {
+      "specifier": "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/src/components/animate-on-mount.tsx",
+      "name": "*"
+    }
+  },
+  "856": {
+    "*": {
+      "specifier": "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/node_modules/@owoce/tangle/dist/runtime/router/error-boundary.js",
+      "name": "*"
+    }
+  }
+}

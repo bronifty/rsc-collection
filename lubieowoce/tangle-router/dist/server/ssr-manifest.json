@@ -1,0 +1,62 @@
+{
+  "248": {
+    "*": {
+      "name": "*",
+      "id": "(ssr-layer)/./src/components/navigation.__ssr__.tsx",
+      "chunks": [
+        "ssr[index]"
+      ],
+      "async": true
+    }
+  },
+  "454": {
+    "*": {
+      "name": "*",
+      "id": "(ssr-layer)/./node_modules/@owoce/tangle/dist/runtime/router/not-found/not-found-boundary.__ssr__.js",
+      "chunks": [
+        "main"
+      ],
+      "async": true
+    }
+  },
+  "459": {
+    "*": {
+      "name": "*",
+      "id": "(ssr-layer)/./node_modules/@owoce/tangle/dist/runtime/router/client-router.__ssr__.js",
+      "chunks": [
+        "main"
+      ],
+      "async": true
+    }
+  },
+  "602": {
+    "*": {
+      "name": "*",
+      "id": "(ssr-layer)/./node_modules/@owoce/tangle/dist/runtime/router/navigation-context.__ssr__.js",
+      "chunks": [
+        "main"
+      ],
+      "async": true
+    }
+  },
+  "621": {
+    "*": {
+      "name": "*",
+      "id": "(ssr-layer)/./src/components/animate-on-mount.__ssr__.tsx",
+      "chunks": [
+        "ssr[index]"
+      ],
+      "async": true
+    }
+  },
+  "856": {
+    "*": {
+      "name": "*",
+      "id": "(ssr-layer)/./node_modules/@owoce/tangle/dist/runtime/router/error-boundary.__ssr__.js",
+      "chunks": [
+        "main"
+      ],
+      "async": true
+    }
+  }
+}

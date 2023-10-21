@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "rsc-example-1",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "tangle dev",
+    "build": "tangle build",
+    "start": "tangle start",
+    "start-raw": "node dist/server/main.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src/**"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "client-only": "^0.0.1",
+    "react": "18.3.0-canary-910045696-20230607",
+    "react-dom": "18.3.0-canary-910045696-20230607",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@owoce/tangle": "0.0.4",
+    "@types/react": "18.2.5",
+    "@types/react-dom": "18.2.3"
+  }
+}

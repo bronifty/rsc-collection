@@ -1,0 +1,286 @@
+diff --git a/.github/workflows/platformatic.yaml b/.github/workflows/platformatic.yaml
+deleted file mode 100644
+index 0947e8b..0000000
+--- a/.github/workflows/platformatic.yaml
++++ /dev/null
+@@ -1,32 +0,0 @@
+-name: Deploy Platformatic DB application to the cloud
+-
+-on:
+-  push:
+-    paths-ignore:
+-      - "docs/**"
+-      - "**.md"
+-
+-jobs:
+-  build_and_deploy:
+-    permissions:
+-      contents: read
+-      pull-requests: write
+-    runs-on: ubuntu-latest
+-    steps:
+-      - name: Checkout application project repository
+-        uses: actions/checkout@v3
+-      - name: npm install --omit=dev
+-        run: npm install --omit=dev
+-      - name: Deploy project
+-        uses: platformatic/onestep@v1
+-        with:
+-          github_token: ${{ secrets.GITHUB_TOKEN }}
+-          platformatic_workspace_id: ccd11b9c-5b0d-4479-990b-c4e67b9cd3b6
+-          platformatic_workspace_key: ${{ secrets.PLATFORMATIC_WORKSPACE_KEY }}
+-          variables: custom_variable1, custom_variable2
+-          secrets: custom_secret1
+-        env:
+-          plt_custom_variable: test1
+-          custom_variable1: test2
+-          custom_variable2: test3
+-          custom_secret1: test5
+diff --git a/README.md b/README.md
+deleted file mode 100644
+index 10f5d5e..0000000
+--- a/README.md
++++ /dev/null
+@@ -1,16 +0,0 @@
+-# React Server Components from Scratch
+-
+-[Watch on YouTube](https://youtu.be/F83wMYl9GWM)
+-
+-This video applies things Dan Abramov taught in [his GitHub discussion](https://github.com/reactwg/server-components/discussions/5).
+-
+-Please note that this is a streamlined, barebones model that takes a significant number of shortcuts and isn't fully representative of the complete, in-depth implementation. It's designed to give you a working knowledge of React and Next.js, allowing you to comprehend the operations occurring behind the scenes. This should teach you how server components _works_, not how to use server components.
+-
+-## How to Use
+-
+-This repo has 2 branches:
+-
+-- `main` for the starting point, and
+-- `spoild` for the finishing one.
+-
+-Feel free to browse them as necessary. You can also clone the repo and run `git checkout <branch>` to switch between them.
+diff --git a/index.html b/index.html
+deleted file mode 100644
+index 2d45d76..0000000
+--- a/index.html
++++ /dev/null
+@@ -1 +0,0 @@
+-<script src="./index.tsx" type="module"></script>
+diff --git a/index.tsx b/index.tsx
+index 7364958..563d949 100644
+--- a/index.tsx
++++ b/index.tsx
+@@ -1,15 +1,31 @@
+-import React from "react";
+ import { hydrateRoot } from "react-dom/client";
+-import Layout from "./layout";
+-import List from "./pages/list";
+-import Detail from "./pages/detail";
+-
+-const searchParams = new URLSearchParams(location.search);
+-const breed = searchParams.get("breed");
+-
+-const root = hydrateRoot(
+-  document,
+-  <Layout bgColor="white">
+-    {location.pathname === "/list" ? <List /> : <Detail breed={breed} />}
+-  </Layout>
+-);
++
++const revive = (k, v) => {
++  if (v === "$") {
++    return Symbol.for("react.element");
++  }
++
++  return v;
++};
++
++// @ts-ignore
++const markup = JSON.parse(window.__initialMarkup, revive);
++
++const root = hydrateRoot(document, markup);
++
++const navigate = (to: string) => {
++  fetch(`${to}&jsx`)
++    .then((r) => r.text())
++    .then((data) => {
++      root.render(JSON.parse(data, revive));
++    });
++};
++
++window.addEventListener("click", (e: any) => {
++  console.log(e.target);
++  if (e.target.tagName !== "A") return;
++
++  e.preventDefault();
++  window.history.pushState(null, null, e.target.href);
++  navigate(e.target.href);
++});
+diff --git a/pages/detail.tsx b/pages/detail.tsx
+index b5a8117..3dac621 100644
+--- a/pages/detail.tsx
++++ b/pages/detail.tsx
+@@ -1,14 +1,10 @@
+-import React, { useEffect, useState } from "react";
++import React from "react";
+ import { REMOTE_URL } from "../util";
+ 
+-const Detail = ({ breed }) => {
+-  const [imageUrl, setImageUrl] = useState("");
+-
+-  useEffect(() => {
+-    fetch(`${REMOTE_URL}/api/breed/${breed}/images/random`)
+-      .then((r) => r.json())
+-      .then((data) => setImageUrl(data.message));
+-  }, []);
++const Detail = async ({ breed }) => {
++  const imageUrl = await fetch(`${REMOTE_URL}/api/breed/${breed}/images/random`)
++    .then((r) => r.json())
++    .then((data) => data.message);
+ 
+   return (
+     <div>
+diff --git a/pages/list.tsx b/pages/list.tsx
+index 41a8ed6..41c66f1 100644
+--- a/pages/list.tsx
++++ b/pages/list.tsx
+@@ -1,32 +1,18 @@
+-import React, { useEffect } from "react";
++import React from "react";
+ import { REMOTE_URL } from "../util";
+ 
+-const List = () => {
+-  const [breeds, setBreeds] = React.useState([]);
+-  const [images, setImages] = React.useState([]);
++const List = async () => {
++  const breeds = await fetch(`${REMOTE_URL}/api/breeds/list/all`)
++    .then((r) => r.json())
++    .then((data) => Object.keys(data.message));
+ 
+-  useEffect(() => {
+-    fetch(`${REMOTE_URL}/api/breeds/list/all`)
+-      .then((r) => r.json())
+-      .then((data) => Object.keys(data.message))
+-      .then(async (breeds) => {
+-        console.log(breeds);
+-        return [
+-          breeds,
+-          await Promise.all(
+-            breeds.map((b) =>
+-              fetch(`${REMOTE_URL}/api/breed/${b}/images/random`)
+-                .then((r) => r.json())
+-                .then((data) => data.message)
+-            )
+-          ),
+-        ];
+-      })
+-      .then(([breeds, images]) => {
+-        setBreeds(breeds);
+-        setImages(images);
+-      });
+-  }, []);
++  const images = await Promise.all(
++    breeds.map((b) =>
++      fetch(`${REMOTE_URL}/api/breed/${b}/images/random`)
++        .then((r) => r.json())
++        .then((data) => data.message)
++    )
++  );
+ 
+   return (
+     <div>
+diff --git a/postcss.config.cjs b/postcss.config.cjs
+deleted file mode 100644
+index 22ab446..0000000
+--- a/postcss.config.cjs
++++ /dev/null
+@@ -1 +0,0 @@
+-module.exports = {plugins:[]};
+diff --git a/server.tsx b/server.tsx
+index e69de29..813dd26 100644
+--- a/server.tsx
++++ b/server.tsx
+@@ -0,0 +1,84 @@
++import React from "react";
++import { renderToString } from "react-dom/server";
++import express from "express";
++import { join } from "path";
++
++import Layout from "./layout";
++
++const app = express();
++
++app.use(express.static("./dist"));
++
++app.get("/:page", async (req, res) => {
++  const mod = await import(
++    join(process.cwd(), "dist", "pages", req.params.page)
++  );
++  const Page = mod.default;
++  const reactTree = await createReactTree(
++    <Layout bgColor={req.params.page === "list" ? "white" : "black"}>
++      <Page {...req.query} />
++    </Layout>
++  );
++
++  if (req.query.jsx === "") {
++    res.end(JSON.stringify(reactTree, escapeJsx));
++    return;
++  }
++
++  const html = `${renderToString(reactTree)}
++  <script>
++  window.__initialMarkup=\`${JSON.stringify(reactTree, escapeJsx)}\`;
++  </script>
++  <script src="/client.js" type="module"></script>`;
++
++  res.end(html);
++});
++
++const createReactTree = async (jsx) => {
++  if (!jsx) {
++    return;
++  }
++
++  if (["string", "boolean", "number"].includes(typeof jsx)) {
++    return jsx;
++  }
++
++  if (Array.isArray(jsx)) {
++    return await Promise.all(jsx.map(createReactTree));
++  }
++
++  if (typeof jsx === "object" && jsx !== null) {
++    if (jsx.$$typeof === Symbol.for("react.element")) {
++      if (typeof jsx.type === "string") {
++        return { ...jsx, props: await createReactTree(jsx.props) };
++      }
++
++      if (typeof jsx.type === "function") {
++        const Component = jsx.type;
++        const props = jsx.props;
++        const renderedComponent = await Component(props);
++        return await createReactTree(renderedComponent);
++      }
++    }
++
++    return Object.fromEntries(
++      await Promise.all(
++        Object.entries(jsx).map(async ([key, value]) => [
++          key,
++          await createReactTree(value),
++        ])
++      )
++    );
++  }
++};
++
++const escapeJsx = (key, value) => {
++  if (value === Symbol.for("react.element")) {
++    return "$";
++  }
++  return value;
++};
++
++app.listen(3000, () => {
++  console.log("Listening on 3000!");
++});

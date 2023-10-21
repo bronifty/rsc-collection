@@ -1,0 +1,44 @@
+{
+  "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/node_modules/@owoce/tangle/dist/runtime/router/client-router.js": {
+    "id": 459,
+    "chunks": [
+      "main"
+    ],
+    "name": "*"
+  },
+  "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/node_modules/@owoce/tangle/dist/runtime/router/navigation-context.js": {
+    "id": 602,
+    "chunks": [
+      "main"
+    ],
+    "name": "*"
+  },
+  "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/node_modules/@owoce/tangle/dist/runtime/router/error-boundary.js": {
+    "id": 856,
+    "chunks": [
+      "main"
+    ],
+    "name": "*"
+  },
+  "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/node_modules/@owoce/tangle/dist/runtime/router/not-found/not-found-boundary.js": {
+    "id": 454,
+    "chunks": [
+      "main"
+    ],
+    "name": "*"
+  },
+  "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/src/components/navigation.tsx": {
+    "id": 248,
+    "chunks": [
+      "client4"
+    ],
+    "name": "*"
+  },
+  "file:///home/bronifty/codes/rsc-and-streaming/tangle-router/src/components/animate-on-mount.tsx": {
+    "id": 621,
+    "chunks": [
+      "client5"
+    ],
+    "name": "*"
+  }
+}

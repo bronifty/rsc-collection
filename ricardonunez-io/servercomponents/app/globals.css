@@ -1,0 +1,300 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Shimmer animation for "hydration-animation.tsx" */
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+            90deg,
+            rgba(56, 189, 248, 0.0) 0%,
+            rgba(56, 189, 248, 0.0) 40%,
+            rgba(56, 189, 248, 0.3) 50%,
+            rgba(56, 189, 248, 0.0) 60%,
+            rgba(56, 189, 248, 0.0) 100%
+    );
+    background-size: 200% 100%;
+    animation: 3s shimmer linear infinite;
+}
+
+.shimmer-first {
+    background: linear-gradient(
+            90deg,
+            rgba(56, 189, 248, 0.0) 0%,
+            rgba(56, 189, 248, 0.0) 40%,
+            rgba(56, 189, 248, 0.3) 50%,
+            rgba(56, 189, 248, 0.0) 60%,
+            rgba(56, 189, 248, 0.0) 100%
+    );
+    background-size: 200% 100%;
+    animation: 3s shimmer-first linear infinite -0.6s;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 110%;
+    }
+    35% {
+        background-position: 0;
+    }
+    70%, 100% {
+        background-position: -40%;
+    }
+}
+
+@keyframes shimmer-first {
+    0% {
+        background-position: 110%;
+    }
+    35% {
+        background-position: 0;
+    }
+    70%, 100% {
+        background-position: -40%;
+    }
+}
+
+.react-tweet-theme {
+    font-style: normal;
+}
+
+blockquote > h3, blockquote > h4 {
+    font-style: normal;
+}
+
+/* Markdown styling */
+h1 {
+    color: theme("colors.sky.600");
+    padding-bottom: 1rem;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+}
+h2 {
+    font-size: 1.75rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+h3 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+}
+h4 {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+h1, h2, h3 {
+    margin-top: 1.5rem;
+}
+h2, h3, h4 {
+    color: theme("colors.gray.900");
+}
+p, text {
+    color: theme('colors.gray.500');
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+ol {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    list-style-type: decimal;
+    list-style-position: outside;
+}
+ul {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    list-style-type: disc;
+    list-style-position: outside;
+}
+blockquote {
+    padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #6B7280;
+    font-style: italic;
+    border-left-width: 3px;
+    border-color: currentColor;
+}
+#home-page-link.no-underline, #github-link.no-underline, #vercel-link.no-underline, #footer.no-underline {
+    text-decoration-line: none;
+}
+@media (prefers-color-scheme: dark) {
+    p, text {
+        color: theme('colors.gray.300');
+    }
+    h1 {
+        color: theme("colors.sky.400");
+    }
+    h2, h3, h4 {
+        color: theme('colors.gray.50');
+    }
+}
+@media (min-width: 640px) {
+    h2 {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+    h3 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+    li, p, text, h4 {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+    }
+}
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3rem;
+        line-height: 1;
+    }
+    h2 {
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    li, p, text, h4 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+}
+h1::before, h2::before, h3::before {
+    content: '';
+    display: block;
+    height: 80px;
+    margin-top: -80px;
+    visibility: hidden;
+}
+#github-link.no-underline, #vercel-link.no-underline, #footer.no-underline, #home-page.no-underline {
+    text-decoration-line: none;
+}
+a {
+    color: theme('colors.sky.600');
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+a:hover {
+    text-decoration-line: underline;
+}
+.tweet-body_root__f5XIs {
+    color: theme("colors.gray.900");
+    margin: 0;
+}
+@media (prefers-color-scheme: dark) {
+    .tweet-body_root__f5XIs {
+        color: white;
+        margin: 0;
+    }
+    a {
+        color: theme('colors.sky.400')
+    }
+}
+blockquote > h1, blockquote > h2, blockquote > h3, blockquote > h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-weight: 500;
+}
+
+blockquote {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Fonts */
+h1, h2, h3 {
+    font-family: -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: -0.5px;
+}
+
+p, text, li, ol, ul {
+    font-family: Cambria, ui-serif, Georgia, "Times New Roman", Times, serif;
+} 
+
+code, pre {
+    font-family: Monaco, Consolas, ui-monospace, SFMono-Regular, Menlo, 'Liberation Mono', 'Courier New', monospace;
+}
+
+/* Hiding scrollbar  */
+pre::-webkit-scrollbar,
+code::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+pre, code {
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+}
+
+/* Code-block styling for highlighted classes + dark/light themes */
+
+.highlighted {
+    width: 100%;
+    display: inline;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .highlighted {
+        background-color: #0f2f57;
+    }
+}
+
+@media (prefers-color-scheme: light), (prefers-color-scheme: no-preference) {
+    .highlighted {
+        background-color: #cce6ff;
+    }
+
+    :root {
+        --shiki-color-text: #171717;
+        --shiki-color-background: transparent;
+        --shiki-token-constant: #171717;
+        --shiki-token-string: #297a3a;
+        --shiki-token-comment: #666666;
+        --shiki-token-keyword: #bd2864;
+        --shiki-token-parameter: #a35200;
+        --shiki-token-function: #0068d6;
+        --shiki-token-string-expression: #297a3a;
+        --shiki-token-punctuation: #171717;
+        --shiki-token-link: #297a3a;
+    }
+}
+
+@media (prefers-color-scheme:dark) {
+    :root {
+        --shiki-color-text: #ededed;
+        --shiki-color-background: transparent;
+        --shiki-token-constant: #ededed;
+        --shiki-token-string: #62c073;
+        --shiki-token-comment: #a1a1a1;
+        --shiki-token-keyword: #f75f8f;
+        --shiki-token-parameter: #ff990a;
+        --shiki-token-function: #52a8ff;
+        --shiki-token-string-expression: #62c073;
+        --shiki-token-punctuation: #ededed;
+        --shiki-token-link: #62c073
+    }
+}
