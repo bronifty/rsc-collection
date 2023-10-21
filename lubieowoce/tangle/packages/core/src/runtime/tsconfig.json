@@ -1,0 +1,18 @@
+{
+  "include": ["**/*.ts", "**/*.tsx"],
+  "compilerOptions": {
+    "strict": true,
+    "outDir": "../../dist/runtime",
+    "declaration": true,
+    "declarationMap": true,
+    "target": "ESNext",
+    "module": "ES2022",
+    "lib": ["es2022", "DOM"],
+    "jsxImportSource": "react",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "types": ["react/next"]
+  }
+}
