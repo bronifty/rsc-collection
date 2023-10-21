@@ -1,0 +1,36 @@
+{
+  "name": "create-waku",
+  "version": "0.5.3",
+  "author": "Daishi Kato",
+  "contributors": [
+    "Vasu Singh"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dai-shi/waku.git"
+  },
+  "bin": "./dist/cli.js",
+  "files": [
+    "src",
+    "dist",
+    "template"
+  ],
+  "type": "commonjs",
+  "scripts": {
+    "start": "node dist/cli.js",
+    "compile": "rm -rf template dist && pnpm run template && pnpm run build",
+    "template": "cp -r ../../examples template/; for d in template/*; do cp -r ../waku/patches $d; json -I -f $d/package.json -e 'this.pnpm??={};this.pnpm.patchedDependencies??={};this.pnpm.patchedDependencies[\"vite@4.4.10\"]=\"patches/vite@4.4.10.patch\"'; done",
+    "build": "esbuild src/* --bundle --platform=node --outdir=dist"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.1",
+    "kolorist": "^1.8.0",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.2",
+    "@types/prompts": "^2.4.5",
+    "json": "^11.0.0",
+    "esbuild": "0.19.4"
+  }
+}
