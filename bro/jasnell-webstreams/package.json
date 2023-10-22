@@ -1,0 +1,19 @@
+{
+  "name": "jasnell-webstreams",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run transform && npm run web && npm run node && npm run consumer",
+    "transform": "node transform-node-stream-web.mjs",
+    "web": "node web-to-node-stream.mjs",
+    "node": "node node-to-web-stream.mjs",
+    "consumer": "cat mobydick.txt | node stream-consumers.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "stream-consumers": "^1.0.2"
+  }
+}
